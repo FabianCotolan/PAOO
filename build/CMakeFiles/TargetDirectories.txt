@@ -1,0 +1,3 @@
+/home/fabi/Desktop/FootballTeams/build/CMakeFiles/FootballTeams.dir
+/home/fabi/Desktop/FootballTeams/build/CMakeFiles/edit_cache.dir
+/home/fabi/Desktop/FootballTeams/build/CMakeFiles/rebuild_cache.dir

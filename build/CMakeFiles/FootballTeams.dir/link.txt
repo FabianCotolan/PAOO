@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/FootballTeams.dir/src/main.cpp.o CMakeFiles/FootballTeams.dir/src/FootballTeam.cpp.o -o FootballTeams

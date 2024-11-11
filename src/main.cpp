@@ -14,6 +14,12 @@ int main() {
     FootballTeam team3 = team1;
     std::cout << "Team 3 (copy of Team 1): " << team3.getName() << ", Coach: " << team3.getCoachName() << ", Trophies: " << team3.getTrophies() << ", Founded: " << team3.getFoundationYear() << std::endl;
 
+    team2 = team1; //  operatorul de atribuire 
+
+    
+    std::cout << "Team 2 after assignment: " << team2.getName() << ", Coach: " << team2.getCoachName() 
+              << ", Trophies: " << team2.getTrophies() << ", Founded: " << team2.getFoundationYear() << std::endl;
+
     return 0;
 }
 

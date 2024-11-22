@@ -23,8 +23,7 @@ FootballPlayer::FootballPlayer(FootballPlayer&& other) noexcept
     : FootballTeam(std::move(other)), // Apelam move constructor-ul clasei de baza
       playerName(std::move(other.playerName)),
       position(std::move(other.position)),
-      age(other.age) {
-  other.age = 0;
+      age(std::move(other.age)) {
     std::cout << "Move constructor called for FootballPlayer: " << playerName << std::endl;
 }
 

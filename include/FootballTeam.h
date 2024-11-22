@@ -28,7 +28,7 @@ public:
     FootballTeam(FootballTeam&& other) noexcept;
 
     // Destructor
-    ~FootballTeam();
+    virtual ~FootballTeam();
   
     virtual void displayInfo() const; // Declaratie metoda virtuala
 

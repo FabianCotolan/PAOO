@@ -61,13 +61,16 @@ int main() {
     player3.displayInfo();
     player1.displayInfo(); // Verificam ca player1 a fost "gol"
 
-    std::cout << "\n-- Polimorfism Example --\n";
+    std::cout << "\n-- Polymorphism Example --\n";
     // Pointer catre obiect derivat
     FootballTeam* echipaB = new FootballPlayer("FC Barcelona", "Xavi Hernandez", 89, 1899, "Lionel Messi", "Forward", 36);
     echipaB->displayInfo();
     delete echipaB; // Destructorii pentru ambele clase sunt apelaii
 
-   
+    std::cout << "\n-- Destructor Order Example --\n";
+    FootballTeam* echipaM = new FootballPlayer("Manchester United", "Erik ten Hag", 50, 1878, "Wayne Rooney", "Midfielder", 35);
+    echipaM->displayInfo();
+    delete echipaM;
 
     return 0;
 }

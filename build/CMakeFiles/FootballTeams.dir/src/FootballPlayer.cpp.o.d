@@ -1,5 +1,7 @@
-CMakeFiles/FootballTeams.dir/src/main.cpp.o: \
- /home/fabi/Desktop/FootballTeams/src/main.cpp /usr/include/stdc-predef.h \
+CMakeFiles/FootballTeams.dir/src/FootballPlayer.cpp.o: \
+ /home/fabi/Desktop/FootballTeams/src/FootballPlayer.cpp \
+ /usr/include/stdc-predef.h \
+ /home/fabi/Desktop/FootballTeams/include/FootballPlayer.h \
  /home/fabi/Desktop/FootballTeams/include/FootballTeam.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
@@ -109,12 +111,9 @@ CMakeFiles/FootballTeams.dir/src/main.cpp.o: \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/functional_hash.h \
  /usr/include/c++/13/bits/hash_bytes.h \
- /usr/include/c++/13/bits/basic_string.tcc \
- /home/fabi/Desktop/FootballTeams/include/FootballPlayer.h \
- /home/fabi/Desktop/FootballTeams/include/FootballTeam.h \
- /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
- /usr/include/c++/13/ios /usr/include/c++/13/exception \
- /usr/include/c++/13/bits/exception_ptr.h \
+ /usr/include/c++/13/bits/basic_string.tcc /usr/include/c++/13/iostream \
+ /usr/include/c++/13/ostream /usr/include/c++/13/ios \
+ /usr/include/c++/13/exception /usr/include/c++/13/bits/exception_ptr.h \
  /usr/include/c++/13/bits/cxxabi_init_exception.h \
  /usr/include/c++/13/typeinfo /usr/include/c++/13/bits/nested_exception.h \
  /usr/include/c++/13/bits/ios_base.h /usr/include/c++/13/ext/atomicity.h \

@@ -1,0 +1,39 @@
+#include "FootballPlayer.h"
+#include <iostream>
+
+// Constructor implicit
+FootballPlayer::FootballPlayer()
+    : FootballTeam(), playerName("Unknown Player"), position("Unknown Position"), age(0) {}
+
+// Constructor parametrizat
+FootballPlayer::FootballPlayer(const std::string& teamName, const std::string& coachName, int trophies,
+                               int foundationYear, const std::string& playerName, const std::string& position, int age)
+    : FootballTeam(teamName, coachName, trophies, foundationYear),
+      playerName(playerName), position(position), age(age) {}
+
+// Copy constructor
+FootballPlayer::FootballPlayer(const FootballPlayer& other)
+    : FootballTeam(other), // Apelam copy constructor-ul clasei de baza
+      playerName(other.playerName), position(other.position), age(other.age) {
+    std::cout << "Copy constructor called for FootballPlayer: " << playerName << std::endl;
+}
+
+// Move constructor
+FootballPlayer::FootballPlayer(FootballPlayer&& other) noexcept
+    : FootballTeam(std::move(other)), // Apelam move constructor-ul clasei de baza
+      playerName(std::move(other.playerName)),
+      position(std::move(other.position)),
+      age(other.age) {
+    std::cout << "Move constructor called for FootballPlayer: " << playerName << std::endl;
+}
+
+// Destructor
+FootballPlayer::~FootballPlayer() {
+    std::cout << "Destructor called for FootballPlayer: " << playerName << std::endl;
+}
+
+// Suprascriere metoda afisare
+void FootballPlayer::displayInfo() const {
+    FootballTeam::displayInfo();
+    std::cout << "Player: " << playerName << ", Position: " << position << ", Age: " << age << std::endl;
+}

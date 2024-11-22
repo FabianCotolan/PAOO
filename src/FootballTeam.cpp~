@@ -58,10 +58,6 @@ FootballTeam::~FootballTeam() {
     std::cout << "Destructor called for team: " << name << std::endl;
 }
 
-void FootballTeam::displayInfo() const {
-    std::cout << "Team: " << name << ", Coach: " << coachName << std::endl;
-}
-
 // Getters
 std::string FootballTeam::getName() const { return name; }
 std::string FootballTeam::getCoachName() const { return coachName; }

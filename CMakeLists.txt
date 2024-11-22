@@ -9,5 +9,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 
 include_directories(include)
-add_executable(FootballTeams src/main.cpp src/FootballTeam.cpp)
+
+
+add_executable(FootballTeams 
+    src/main.cpp 
+    src/FootballTeam.cpp 
+    src/FootballPlayer.cpp
+)
+
 

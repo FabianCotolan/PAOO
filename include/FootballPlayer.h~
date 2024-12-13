@@ -11,8 +11,8 @@ private:
 
 public:
     FootballPlayer(const std::string &name, int goalsScored);
-    void addGoals();
-    void displayInfo() const;
+    void incrementGoals();
+    void showInfo() const;
 };
 
 #endif

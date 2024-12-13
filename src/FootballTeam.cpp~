@@ -1,74 +1,14 @@
 #include "FootballTeam.h"
-#include <iostream>
 
-// Default constructor
-FootballTeam::FootballTeam()
-    : name("Unknown"), coachName("Unknown"), trophies(new int(0)), foundationYear(0) {
-    std::cout << "S-a apelat constructorul default pentru echipa." << std::endl;
+FootballTeam::FootballTeam(const std::string &playerName, int goals)
+    : player(std::make_unique<FootballPlayer>(playerName, goals)) {}
+
+void FootballTeam::usePlayer() {
+    std::lock_guard<std::mutex> lock(teamMutex);
+    player->showInfo();
 }
 
-
-// Constructor with member initializer list, allocating memory for trophies
-FootballTeam::FootballTeam(const std::string& name, const std::string& coachName, int trophies, int foundationYear)
-    : name(name), coachName(coachName), foundationYear(foundationYear) {
-    this->trophies = new int(trophies); // Alocare dinamica pentru trofee
+void FootballTeam::incrementPlayerGoals() {
+    std::lock_guard<std::mutex> lock(teamMutex);
+    player->incrementGoals();
 }
-
-// Copy constructor
-FootballTeam::FootballTeam(const FootballTeam& other)
-    : name(other.name), coachName(other.coachName), foundationYear(other.foundationYear) {
-    trophies = new int(*(other.trophies)); // Alocare si copierea valorii pentru trofee
-}
-
-// Assignment operator
-FootballTeam& FootballTeam::operator=(const FootballTeam& other) {
-    if (this == &other) {
-        return *this;
-    }
-
-    // Eliberam memoria existenta pentru trofee
-    delete trophies;
-
-    // Copierea valorilor
-    name = other.name;
-    coachName = other.coachName;
-    foundationYear = other.foundationYear;
-
-    // Alocam si copiem valoarea pentru trofee
-    trophies = new int(*(other.trophies));
-
-    return *this;
-}
-
-// Move constructor
-FootballTeam::FootballTeam(FootballTeam&& other) noexcept
-    : name(std::move(other.name)),
-      coachName(std::move(other.coachName)),
-      trophies(other.trophies),
-      foundationYear(other.foundationYear) {
-    //  prevent double deletion
-    other.trophies = nullptr;
-    std::cout << "S-a apelat move constructor pentru echipa: " << name << std::endl;
-}
-
-
-// Destructor
-FootballTeam::~FootballTeam() {
-    delete trophies; // Eliberam memoria alocata dinamic pentru trofee
-    std::cout << "Destructor called for team: " << name << std::endl;
-}
-
-// Getters
-std::string FootballTeam::getName() const { return name; }
-std::string FootballTeam::getCoachName() const { return coachName; }
-int FootballTeam::getTrophies() const { return *trophies; }
-int FootballTeam::getFoundationYear() const { return foundationYear; }
-
-// Setters
-void FootballTeam::setName(const std::string& name) { this->name = name; }
-void FootballTeam::setCoachName(const std::string& coachName) { this->coachName = coachName; }
-void FootballTeam::setTrophies(int trophies) {
-    *(this->trophies) = trophies; // Setam valoarea trofeelor prin dereferentiere
-}
-void FootballTeam::setFoundationYear(int foundationYear) { this->foundationYear = foundationYear; }
-

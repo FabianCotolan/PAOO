@@ -1,76 +1,42 @@
-#include "FootballTeam.h"
 #include "FootballPlayer.h"
-#include <iostream>
+#include "FootballTeam.h"
+#include <memory>
+#include <thread>
+
+void teamMatchSimulation(std::shared_ptr<FootballPlayer> player1, std::shared_ptr<FootballPlayer> player2);
 
 int main() {
-    std::cout << "\n-- Default Constructor Test --\n";
-    // Crearea unui obiect folosind constructorul default
-    FootballTeam teamDefault;
-    std::cout << "Team Default: " << teamDefault.getName() 
-              << ", Coach: " << teamDefault.getCoachName() 
-              << ", Trophies: " << teamDefault.getTrophies() 
-              << ", Founded: " << teamDefault.getFoundationYear() << std::endl;
+    FootballTeam barcelona("Lionel Messi", 30);
+    FootballTeam real("Cristiano Ronaldo", 25);
 
-    std::cout << "\n-- Parameterized Constructor Test --\n";
-    // Crearea obiectelor de tip FootballTeam
-    FootballTeam team1("Real Madrid", "Carlo Ancelotti", 95, 1902);
-    FootballTeam team2("FC Barcelona", "Xavi Hernandez", 89, 1899);
+    barcelona.usePlayer();
+    real.usePlayer();
 
-    // Afisarea informatiilor despre echipe
-    std::cout << "Team 1: " << team1.getName() << ", Coach: " << team1.getCoachName() 
-              << ", Trophies: " << team1.getTrophies() 
-              << ", Founded: " << team1.getFoundationYear() << std::endl;
-    std::cout << "Team 2: " << team2.getName() << ", Coach: " << team2.getCoachName() 
-              << ", Trophies: " << team2.getTrophies() 
-              << ", Founded: " << team2.getFoundationYear() << std::endl;
+    barcelona.incrementPlayerGoals();
+    real.incrementPlayerGoals();
 
-    std::cout << "\n-- Copy Constructor Test --\n";
-    // Testare copy constructor
-    FootballTeam team3 = team1;
-    std::cout << "Team 3 (copy of Team 1): " << team3.getName() << ", Coach: " << team3.getCoachName() 
-              << ", Trophies: " << team3.getTrophies() 
-              << ", Founded: " << team3.getFoundationYear() << std::endl;
+    barcelona.usePlayer();
+    real.usePlayer();
 
-   /* std::cout << "\n-- Assignment Operator Test --\n";
-    // Testare operator de atribuire
-    team2 = team1;
-    std::cout << "Team 2 after assignment: " << team2.getName() << ", Coach: " << team2.getCoachName() 
-              << ", Trophies: " << team2.getTrophies() 
-              << ", Founded: " << team2.getFoundationYear() << std::endl;
-              */
+    auto barcelonaPlayer = std::make_shared<FootballPlayer>("Pedri", 10);
+    auto realPlayer = std::make_shared<FootballPlayer>("Vinicius Jr.", 12);
 
-    std::cout << "\n-- Move Constructor Test --\n";
-    // Testare move constructor
-    FootballTeam team4 = std::move(team1); // Mutare resurse din team1 în team4
-    std::cout << "Team 4 (moved from Team 1): " << team4.getName() 
-              << ", Coach: " << team4.getCoachName() 
-              << ", Trophies: " << team4.getTrophies() 
-              << ", Founded: " << team4.getFoundationYear() << std::endl;
+    std::thread match1(teamMatchSimulation, barcelonaPlayer, realPlayer);
+    std::thread match2(teamMatchSimulation, realPlayer, barcelonaPlayer);
 
-    std::cout << "\n-- Testing FootballPlayer Constructors and Polymorphism --\n";
-    // Testare constructori pentru clasa derivata FootballPlayer
-    FootballPlayer player1("Real Madrid", "Carlo Ancelotti", 95, 1902, "Cristiano Ronaldo", "Forward", 37);
-    FootballPlayer player2 = player1; // Copy constructor
-
-    // Afisare informatii jucatori
-    player1.displayInfo();
-    player2.displayInfo();
-
-    std::cout << "\n-- Move Constructor Test for FootballPlayer --\n";
-    FootballPlayer player3 = std::move(player1); // Move constructor
-    player3.displayInfo();
-    player1.displayInfo(); // Verificam ca player1 a fost "gol"
-
-    std::cout << "\n-- Polymorphism Example --\n";
-    // Pointer catre obiect derivat
-    FootballTeam* echipaB = new FootballPlayer("FC Barcelona", "Xavi Hernandez", 89, 1899, "Lionel Messi", "Forward", 36);
-    echipaB->displayInfo();
-    delete echipaB; // Destructorii pentru ambele clase sunt apelaii
-
-    std::cout << "\n-- Destructor Order Example --\n";
-    FootballTeam* echipaM = new FootballPlayer("Manchester United", "Erik ten Hag", 50, 1878, "Wayne Rooney", "Midfielder", 35);
-    echipaM->displayInfo();
-    delete echipaM;
+    match1.join();
+    match2.join();
 
     return 0;
+}
+
+void teamMatchSimulation(std::shared_ptr<FootballPlayer> player1, std::shared_ptr<FootballPlayer> player2) {
+    static std::mutex matchMutex;
+    std::lock_guard<std::mutex> lock(matchMutex);
+
+    player1->addGoals();
+    player2->addGoals();
+
+    player1->displayInfo();
+    player2->displayInfo();
 }
